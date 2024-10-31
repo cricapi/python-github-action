@@ -1,4 +1,4 @@
-requests==2.28.1
+requests==2.31.0
 beautifulsoup4==4.12.2
 blinker==1.7.0
 cchardet==2.1.7
