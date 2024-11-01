@@ -2,6 +2,7 @@ import logging
 import logging.handlers
 import os
 
+import random
 import requests
 from bs4 import BeautifulSoup as bs
 from markupsafe import escape
