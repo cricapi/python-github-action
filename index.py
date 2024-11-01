@@ -1,7 +1,3 @@
-import logging
-import logging.handlers
-import os
-
 import random
 import requests
 from bs4 import BeautifulSoup as bs
@@ -11,31 +7,11 @@ from flask_cors import CORS
 from datetime import datetime
 import pytz
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger_file_handler = logging.handlers.RotatingFileHandler(
-    "status.log",
-    maxBytes=1024 * 1024,
-    backupCount=1,
-    encoding="utf8",
-)
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-logger_file_handler.setFormatter(formatter)
-logger.addHandler(logger_file_handler)
-
-try:
-    SOME_SECRET = os.environ["SOME_SECRET"]
-except KeyError:
-    SOME_SECRET = "Token not available!"
-    #logger.info("Token not available!")
-    #raise
-
-
 # Replace the CORS URL with your's
 app = Flask(__name__)
 app.json.sort_keys = False
 cors = CORS(app, resources={
-            r"/score/*": {"origins": [r'^https://.+sanweb.info$', r'^https://.+mskian.com$']}})
+            r"/score/*": {"origins": "*"}})
 
 user_agent_list = [
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
@@ -554,3 +530,7 @@ def invalid_route(e):
 
 if __name__ == '__main__':
     app.run()
+    # app.run(
+    #    host="0.0.0.0",
+    #    port=int("5000")
+    # )
